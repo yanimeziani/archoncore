@@ -1,0 +1,15 @@
+{
+    "shard_id": "P4P-ALPHA-GENESIS",
+    "timestamp": 1736812959,
+    "architecture_hashes": {
+        "modeling_arkhon.py": "6ebb7f53f06fbfd719e311796ea2c61178650fe1605c09d075cd383054786cda",
+        "mamba3.py": "db887236f2978f5fcd38d05da60226b14eab4b5c8650c9d78fb84f5e8d8b96c6",
+        "bedrock.py": "1d7c99a2261802e0a42f42835360972a884cd04a5abcf31466d40db072c42dcc",
+        "model.py": "ff869f366d26afe4398a0a88a846290a29acb596bd76583d56b587a5210f5c3b",
+        "Manifesto.md": "5a7791064eed48a4a720890834354403f63e1dac458afbe574199c7df29d0e8f"
+    },
+    "bio_key_anchor": "ATACCGCTCAGTTCTACGATCCTACAAACTGA",
+    "protocol": "Kyber Bedrock Protocol, Ares",
+    "status": "SOVEREIGN",
+    "p4p_signature": "d9222cb67de61e2651f8f9e5faeae1511ccf92b81c49a794c5d5b05d52e91e4e"
+}

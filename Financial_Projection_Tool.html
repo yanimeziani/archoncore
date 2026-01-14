@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CDAEIA Submission Dashboard</title>
+    <style>
+        :root {
+            --primary: #00f2ff;
+            --accent: #7000ff;
+            --bg: #050507;
+            --surface: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
+            --text: #ffffff;
+            --text-dim: #a0a0b0;
+            --font: 'Outfit', 'Inter', system-ui, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            background-image:
+                radial-gradient(circle at 0% 0%, rgba(112, 0, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, rgba(0, 242, 255, 0.15) 0%, transparent 50%);
+        }
+
+        .dashboard {
+            width: 100%;
+            max-width: 1000px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 850px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: var(--surface);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 32px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        h1,
+        h2 {
+            margin: 0 0 20px 0;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(to right, #fff, #888);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .input-row {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px 16px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            border-color: var(--primary);
+            outline: none;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .big-number {
+            font-size: 3rem;
+            font-weight: 900;
+            line-height: 1;
+            margin: 10px 0;
+            color: #fff;
+        }
+
+        .sub-text {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .checklist-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .checklist-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .checklist-item.checked {
+            opacity: 0.6;
+            text-decoration: line-through;
+        }
+
+        .progress-container {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            width: 0%;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            background: var(--accent);
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .btn-print {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 10px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 20px;
+            width: 100%;
+            transition: all 0.2s;
+        }
+
+        .btn-print:hover {
+            background: var(--primary);
+            color: var(--bg);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard">
+        <div class="card full-width">
+            <div class="badge">CDAEIA 2026 EDITION</div>
+            <h1>Readiness Dashboard</h1>
+            <p class="sub-text">Monitor your submission status and financial incentives in real-time.</p>
+        </div>
+
+        <div class="card">
+            <h2>📊 Estimateur de Crédit</h2>
+            <div class="input-row">
+                <label>Effectif Technique (ETP)</label>
+                <input type="number" id="emp" value="8" oninput="update()">
+            </div>
+            <div class="input-row">
+                <label>Salaire Moyen ($)</label>
+                <input type="number" id="sal" value="95000" oninput="update()">
+            </div>
+            <div class="result">
+                <div class="sub-text">Estimation du Crédit Annuel</div>
+                <div class="big-number" id="credit">$0</div>
+                <div class="sub-text" id="details">Basé sur 30% après seuil d'exclusion.</div>
+            </div>
+            <button class="btn-print" onclick="window.print()">Exporter en PDF</button>
+        </div>
+
+        <div class="card">
+            <h2>✅ Liste de Contrôle</h2>
+            <div class="progress-container">
+                <div class="progress-bar" id="progress"></div>
+            </div>
+            <div id="checklist">
+                <div class="checklist-item" onclick="toggle(this)">
+                    <input type="checkbox" onchange="updateProgress()">
+                    <span>Revenue NAICS (>50%)</span>
+                </div>
+                <div class="checklist-item" onclick="toggle(this)">
+                    <input type="checkbox" onchange="updateProgress()">
+                    <span>Min. 6 employés éligibles</span>
+                </div>
+                <div class="checklist-item" onclick="toggle(this)">
+                    <input type="checkbox" onchange="updateProgress()">
+                    <span>Description IA "Significative"</span>
+                </div>
+                <div class="checklist-item" onclick="toggle(this)">
+                    <input type="checkbox" onchange="updateProgress()">
+                    <span>Registres de temps prêts</span>
+                </div>
+                <div class="checklist-item" onclick="toggle(this)">
+                    <input type="checkbox" onchange="updateProgress()">
+                    <span>Fin d'exercice financier</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function update() {
+            const emp = parseFloat(document.getElementById('emp').value) || 0;
+            const sal = parseFloat(document.getElementById('sal').value) || 0;
+            const threshold = 18571;
+            const credit = Math.max(0, (sal - threshold) * emp * 0.30);
+            document.getElementById('credit').innerText = '$' + credit.toLocaleString('fr-CA', { maximumFractionDigits: 0 });
+        }
+
+        function toggle(el) {
+            const cb = el.querySelector('input');
+            if (event.target !== cb) cb.checked = !cb.checked;
+            el.classList.toggle('checked', cb.checked);
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const total = document.querySelectorAll('#checklist input').length;
+            const checked = document.querySelectorAll('#checklist input:checked').length;
+            const percent = (checked / total) * 100;
+            document.getElementById('progress').style.width = percent + '%';
+        }
+
+        update();
+        updateProgress();
+    </script>
+</body>
+
+</html>
